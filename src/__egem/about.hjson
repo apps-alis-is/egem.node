@@ -1,0 +1,9 @@
+{
+    "Description": '''
+EtherGem Quarry node
+EGEM is a community supported project, which means its members are the backbone.  We offer a custom node reward system that pays dividends to node holders, and a robust discord community with a bot that helps management of daily tasks for node holders and members.
+'''
+    Links: [
+        { website: "https://egem.io/" }
+    ]
+}

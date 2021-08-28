@@ -1,0 +1,46 @@
+[Unit]
+Description={{{ID}}}-geth service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+
+Environment="HOME={{{model.DATA_DIR}}}"
+
+{{#model.IS_ISOLATED}}
+Environment="PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin"
+
+# Migrate to + for systemd 246+
+ExecStartPre=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --id={{{ID}}}-netns \
+{{#configuration.OUTBOUND_ADDR}}
+					--outbound-addr={{{configuration.OUTBOUND_ADDR}}} \
+{{#configuration.PORT_MAP}}
+					-p={{{configuration.OUTBOUND_ADDR}}}:{{{.}}} \
+{{/configuration.PORT_MAP}}
+{{/configuration.OUTBOUND_ADDR}}
+{{^configuration.OUTBOUND_ADDR}}
+					--default-outbound-addr
+{{#configuration.PORT_MAP}}
+					-p={{{.}}} \
+{{/configuration.PORT_MAP}}
+{{/configuration.OUTBOUND_ADDR}}
+
+ExecStart={{{model.IP_PATH}}} netns exec {{{ID}}}-netns su -m {{{USER}}} -c "{{{ROOT_DIR}}}/bin/{{{model.DAEMON_NAME}}} --syncmode=fast --cache=512 --rpc --maxpeers=100 {{{model.STARTUP_ARGS__CLI_ARGS}}}"
+ExecStop=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --id={{{ID}}}-netns --remove
+{{/model.IS_ISOLATED}}
+{{^model.IS_ISOLATED}}
+User={{{USER}}}
+Group={{{USER}}}
+
+ExecStart={{{ROOT_DIR}}}/bin/{{{model.DAEMON_NAME}}} --syncmode=fast --cache=512 --rpc --maxpeers=100 {{{model.STARTUP_ARGS__CLI_ARGS}}}
+{{/model.IS_ISOLATED}}
+
+{{#model.SERVICE_CONFIGURATION__ARRAY}}
+{{{key}}}={{{value}}}
+{{/model.SERVICE_CONFIGURATION__ARRAY}}
+
+[Install]
+WantedBy=default.target

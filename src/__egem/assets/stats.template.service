@@ -1,0 +1,29 @@
+[Unit]
+Description={{{ID}}}-stats service
+After=network.target {{{ID}}}-{{{model.SERVICE_NAME}}}.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+
+Environment="HOME={{{model.DATA_DIR}}}"
+
+{{#model.IS_ISOLATED}}
+Environment="PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin"
+ExecStart={{{model.IP_PATH}}} netns exec {{{ID}}}-netns su -m {{{USER}}} -c "{{{ROOT_DIR}}}/bin/stats
+{{/model.IS_ISOLATED}}
+{{^model.IS_ISOLATED}}
+User={{{USER}}}
+Group={{{USER}}}
+
+ExecStart={{{ROOT_DIR}}}/bin/stats
+{{/model.IS_ISOLATED}}
+
+{{#model.SERVICE_CONFIGURATION__ARRAY}}
+{{{key}}}={{{value}}}
+{{/model.SERVICE_CONFIGURATION__ARRAY}}
+
+[Install]
+WantedBy=default.target

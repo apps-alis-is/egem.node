@@ -1,0 +1,8 @@
+{
+    "id": "egem.node" ,
+    "version" : "0.0.1",
+    "dependencies": [
+        { "id":"eth.base" },
+        { "id":"egem.binaries"}
+    ]
+}
