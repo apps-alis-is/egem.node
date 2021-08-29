@@ -15,7 +15,17 @@ Ether-1 Node AMI app - runs system, master or gateway node.
     "id": "egem1",
     "type": "egem.node",
     "configuration": {
-        "OUTBOUND_ADDR": "<ipv4>"
+        // optional
+        "OUTBOUND_ADDR": "<ipv4>",
+        // optional
+        "PORT_MAP": [
+            "30666:30666",
+            "30666:30666/udp",
+            "8895:8895",
+            "8895:8895/udp",
+            "8897:8897",
+            "8897:8897/udp"
+        ]
     },
     "user": "egem"
 }
