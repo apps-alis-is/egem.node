@@ -20,22 +20,24 @@ ExecStartPre=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --id={{{ID}}}-netns 
 {{#model.PORT_MAP}}
 					-p={{{configuration.OUTBOUND_ADDR}}}:{{{.}}} \
 {{/model.PORT_MAP}}
+					--force --localhost
 {{/configuration.OUTBOUND_ADDR}}
 {{^configuration.OUTBOUND_ADDR}}
-					--default-outbound-addr
+					--default-outbound-addr \
 {{#model.PORT_MAP}}
 					-p={{{.}}} \
 {{/model.PORT_MAP}}
+					--force --localhost
 {{/configuration.OUTBOUND_ADDR}}
 
-ExecStart={{{model.IP_PATH}}} netns exec {{{ID}}}-netns su -m {{{USER}}} -c "{{{ROOT_DIR}}}/bin/{{{model.DAEMON_NAME}}} --syncmode=fast --cache=512 --rpc --maxpeers=100 {{{model.STARTUP_ARGS__CLI_ARGS}}}"
+ExecStart={{{model.IP_PATH}}} netns exec {{{ID}}}-netns su -m {{{USER}}} -c "{{{ROOT_DIR}}}/bin/{{{model.DAEMON_NAME}}} --syncmode=fast --cache=512 --rpc --rpcapi=web3,eth,net --rpccorsdomain=* --rpcaddr=0.0.0.0 --rpcvhosts=* --maxpeers=100 {{{model.STARTUP_ARGS__CLI_ARGS}}}"
 ExecStop=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --id={{{ID}}}-netns --remove
 {{/model.IS_ISOLATED}}
 {{^model.IS_ISOLATED}}
 User={{{USER}}}
 Group={{{USER}}}
 
-ExecStart={{{ROOT_DIR}}}/bin/{{{model.DAEMON_NAME}}} --syncmode=fast --cache=512 --rpc --maxpeers=100 {{{model.STARTUP_ARGS__CLI_ARGS}}}
+ExecStart={{{ROOT_DIR}}}/bin/{{{model.DAEMON_NAME}}} --syncmode=fast --cache=512 --rpc --rpcapi=web3,eth,net --rpccorsdomain=* --rpcaddr=0.0.0.0 --rpcvhosts=* --maxpeers=100 {{{model.STARTUP_ARGS__CLI_ARGS}}}
 {{/model.IS_ISOLATED}}
 
 {{#model.SERVICE_CONFIGURATION__ARRAY}}

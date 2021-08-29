@@ -22,7 +22,7 @@ am.app.set_model(
     {
         IP_PATH = IP_PATH,
         IPC_PATH = path.combine(_dataDir, ".ethergem/egem.ipc"),
-        IS_ISOLATED = am.app.get_configuration("OUTBOUND_ADDR", false) or am.app.get_configuration("PORT_MAP", false),
+        IS_ISOLATED = am.app.get_configuration("OUTBOUND_ADDR", false) or am.app.get_configuration("PORT_MAP", false) and true,
         SERVICES = {
             ["egem-geth"] = "__egem/assets/daemon.service",
             ["egem-stats"] = "__egem/assets/stats.service"
