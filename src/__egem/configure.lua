@@ -28,7 +28,8 @@ if am.app.get_model("IS_ISOLATED") ~= nil then
         fs.remove(_tmpFile)
         ami_error("Failed to download: " .. tostring(_error))
     end
-	fs.move(_tmpFile, "bin/netns-cli.lua")
+	fs.copy_file(_tmpFile, "bin/netns-cli.lua")
+	fs.safe_remove(_tmpFile)
 	log_success"netns-cli downloaded"
 end
 
