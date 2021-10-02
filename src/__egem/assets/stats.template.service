@@ -1,6 +1,6 @@
 [Unit]
 Description={{{ID}}}-stats service
-After=network.target {{{ID}}}-{{{model.SERVICE_NAME}}}.service
+After=network.target {{{ID}}}-egem-geth.service
 StartLimitIntervalSec=0
 
 [Service]
