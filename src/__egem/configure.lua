@@ -23,7 +23,7 @@ end
 if am.app.get_model("IS_ISOLATED") ~= nil then 
 	log_info"'netns' isolation required. Downloading netns-cli..."
 	local _tmpFile = os.tmpname()
-    local _ok, _error = net.safe_download_file("https://github.com/alis-is/netns-cli/releases/download/0.0.3/netns-cli.lua", _tmpFile, {followRedirects = true})
+    local _ok, _error = net.safe_download_file("https://github.com/alis-is/netns-cli/releases/download/0.0.4/netns-cli.lua", _tmpFile, {followRedirects = true})
     if not _ok then
         fs.remove(_tmpFile)
         ami_error("Failed to download: " .. tostring(_error))
