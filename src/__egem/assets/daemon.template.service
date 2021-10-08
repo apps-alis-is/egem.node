@@ -30,7 +30,7 @@ ExecStartPre=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --id={{{ID}}}-netns 
 					--force --localhost
 {{/configuration.OUTBOUND_ADDR}}
 
-ExecStart={{{model.IP_PATH}}} netns exec {{{ID}}}-netns su -m {{{USER}}} -c "{{{ROOT_DIR}}}/bin/{{{model.DAEMON_NAME}}} --syncmode=fast --cache=512 --rpc --rpcapi=web3,eth,net --rpccorsdomain=* --rpcaddr=0.0.0.0 --rpcvhosts=* --maxpeers=100 {{{model.STARTUP_ARGS__CLI_ARGS}}}"
+ExecStart={{{model.IP_PATH}}} netns exec {{{ID}}}-netns runuser -u {{{USER}}} -m -- {{{ROOT_DIR}}}/bin/{{{model.DAEMON_NAME}}} --syncmode=fast --cache=512 --rpc --rpcapi=web3,eth,net --rpccorsdomain=* --rpcaddr=0.0.0.0 --rpcvhosts=* --maxpeers=100 {{{model.STARTUP_ARGS__CLI_ARGS}}}
 ExecStopPost=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --id={{{ID}}}-netns --remove
 {{/model.IS_ISOLATED}}
 {{^model.IS_ISOLATED}}
