@@ -1,0 +1,79 @@
+[Eth]
+NetworkId = 1987
+SyncMode = "fast"
+NoPruning = true
+NoPrefetch = false
+LightPeers = 100
+UltraLightFraction = 75
+DatabaseCache = 512
+DatabaseFreezer = ""
+TrieCleanCache = 256
+TrieDirtyCache = 256
+TrieTimeout = 3600000000000
+EnablePreimageRecording = false
+EWASMInterpreter = ""
+EVMInterpreter = ""
+
+[Eth.Miner]
+GasFloor = 8000000
+GasCeil = 8000000
+GasPrice = 1000000000
+Recommit = 3000000000
+Noverify = false
+
+[Eth.Ethash]
+CacheDir = "ethash"
+CachesInMem = 2
+CachesOnDisk = 3
+DatasetDir = ""
+DatasetsInMem = 1
+DatasetsOnDisk = 2
+PowMode = 0
+
+[Eth.TxPool]
+Locals = []
+NoLocals = false
+Journal = "transactions.rlp"
+Rejournal = 3600000000000
+PriceLimit = 1
+PriceBump = 10
+AccountSlots = 16
+GlobalSlots = 4096
+AccountQueue = 64
+GlobalQueue = 1024
+Lifetime = 10800000000000
+
+[Eth.GPO]
+Blocks = 20
+Percentile = 60
+
+[Shh]
+MaxMessageSize = 1048576
+MinimumAcceptedPOW = 2e-01
+RestrictConnectionBetweenLightClients = false
+
+[Node]
+DataDir = "{{{model.DATA_DIR}}}"
+omitempty = ""
+IPCPath = "egem.ipc"
+HTTPPort = 8895
+HTTPVirtualHosts = ["localhost"]
+HTTPModules = ["net", "web3", "eth", "shh"]
+WSPort = 8896
+WSModules = ["net", "web3", "eth", "shh"]
+GraphQLPort = 8897
+
+[Node.P2P]
+MaxPeers = 150
+NoDiscovery = false
+BootstrapNodes = ["enode://0ee625f94d2e127821e566b2e9bb4842d8ad9a841a0906bef4c3694cabba03f76dd03eefa593eecb6f740a49d10401464407f11ca2767a72a03b4ec071b1c5f4@173.212.232.122:30666", "enode://f3e2de05fad0ec6e0951563ca9e8427fbc5469be57db028c1ddb93dcef686d1a43ebf7fd7ed050e939210a8f8c34e2e476b9a488d457c424c439e60aa365a263@62.171.132.13:30666", "enode://de0dfd16fec4004cf79ff3943f614e30013095596c420b9d09316f36948dfa37e12acc0671c0eeb09549aa170feca096eee82587edfb5063198ab65b95f1e0b1@81.166.105.8:30666", "enode://9faeebb85c9f4295939039ec51e600e988db904402d2a9ef1992acc67e4ebd1cec269faddb4cd535c4dc1d76dab6eeb30027f29899b96de94aac03c7f81a40e4@104.168.163.146:30666", "enode://58b568cb4879fb827ab59206816d729975b96eab8f73490e120475410d428ea705068be7c35a84d2b64085dacf4a549647fa2ef806c02f22d0ec891978cb5fea@51.79.65.100:30300", "enode://9d7c21c0b13ae1b6320d7e44cbf7b60f8e6808ee538e5ca165a907a434e9d1352827da625260a63e007417449a029f4f35b658a24abc672525f03d24602c4953@51.79.65.100:30301", "enode://2eccc0a5f36bdc500f137219f57ffb649a380e076fbe66346bfef924eb917de7954dfcb5b6e10f15d6b00c3fba2ef5d608f6d7237e9a03d9aedf2db4ee446b44@192.248.181.19:30666", "enode://268c97667de6b333ceedcf67519673a87ee4901df73ecf2b0e625ef37cba9048fdf6314a215e64307e8ccbf0daf5a08e6d0463cf2efe8c6f25c7c40b5f0ecce9@194.163.160.48:30777", "enode://c358e77ada0730076815bec0092731d33a0f00a903819e9875e4d9e84c49e492bd83110bcdd8d2de90e4ed9a0aee7eb7fa4b5f67d3f4fdf1fc2e3df4fe9e924b@194.163.160.48:30666"]
+BootstrapNodesV5 = []
+StaticNodes = []
+TrustedNodes = ["enode://0ee625f94d2e127821e566b2e9bb4842d8ad9a841a0906bef4c3694cabba03f76dd03eefa593eecb6f740a49d10401464407f11ca2767a72a03b4ec071b1c5f4@173.212.232.122:30666", "enode://f3e2de05fad0ec6e0951563ca9e8427fbc5469be57db028c1ddb93dcef686d1a43ebf7fd7ed050e939210a8f8c34e2e476b9a488d457c424c439e60aa365a263@62.171.132.13:30666", "enode://de0dfd16fec4004cf79ff3943f614e30013095596c420b9d09316f36948dfa37e12acc0671c0eeb09549aa170feca096eee82587edfb5063198ab65b95f1e0b1@81.166.105.8:30666", "enode://9faeebb85c9f4295939039ec51e600e988db904402d2a9ef1992acc67e4ebd1cec269faddb4cd535c4dc1d76dab6eeb30027f29899b96de94aac03c7f81a40e4@104.168.163.146:30666", "enode://58b568cb4879fb827ab59206816d729975b96eab8f73490e120475410d428ea705068be7c35a84d2b64085dacf4a549647fa2ef806c02f22d0ec891978cb5fea@51.79.65.100:30300", "enode://9d7c21c0b13ae1b6320d7e44cbf7b60f8e6808ee538e5ca165a907a434e9d1352827da625260a63e007417449a029f4f35b658a24abc672525f03d24602c4953@51.79.65.100:30301", "enode://2eccc0a5f36bdc500f137219f57ffb649a380e076fbe66346bfef924eb917de7954dfcb5b6e10f15d6b00c3fba2ef5d608f6d7237e9a03d9aedf2db4ee446b44@192.248.181.19:30666", "enode://268c97667de6b333ceedcf67519673a87ee4901df73ecf2b0e625ef37cba9048fdf6314a215e64307e8ccbf0daf5a08e6d0463cf2efe8c6f25c7c40b5f0ecce9@194.163.160.48:30777", "enode://c358e77ada0730076815bec0092731d33a0f00a903819e9875e4d9e84c49e492bd83110bcdd8d2de90e4ed9a0aee7eb7fa4b5f67d3f4fdf1fc2e3df4fe9e924b@194.163.160.48:30666"]
+ListenAddr = ":30666"
+EnableMsgEvents = false
+
+[Node.HTTPTimeouts]
+ReadTimeout = 30000000000
+WriteTimeout = 30000000000
+IdleTimeout = 120000000000

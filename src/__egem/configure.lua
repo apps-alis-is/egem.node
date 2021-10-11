@@ -23,7 +23,7 @@ end
 if am.app.get_model("IS_ISOLATED") ~= nil then 
 	log_info"'netns' isolation required. Downloading netns-cli..."
 	local _tmpFile = os.tmpname()
-    local _ok, _error = net.safe_download_file("https://github.com/alis-is/netns-cli/releases/download/0.0.4/netns-cli.lua", _tmpFile, {followRedirects = true})
+    local _ok, _error = net.safe_download_file("https://github.com/alis-is/netns-cli/releases/download/0.0.5/netns-cli.lua", _tmpFile, {followRedirects = true})
     if not _ok then
         fs.remove(_tmpFile)
         ami_error("Failed to download: " .. tostring(_error))
@@ -32,6 +32,13 @@ if am.app.get_model("IS_ISOLATED") ~= nil then
 	fs.safe_remove(_tmpFile)
 	log_success"netns-cli downloaded"
 end
+
+local _configFilePath = "__egem/assets/config.toml"
+if am.app.get_configuration("CONFIG_FILE_SOURCE") ~= nil then
+    _configFilePath = am.app.get_configuration("CONFIG_FILE_SOURCE")
+end
+local _ok, _error = fs.safe_copy_file(_configFilePath, path.combine(DATA_PATH, "config.toml"))
+ami_assert(_ok, "Failed to copy configuration file because of '" .. (_error or "").. "'!")
 
 log_info "Configuring EGEM services..."
 -- we reuse ethereum base
