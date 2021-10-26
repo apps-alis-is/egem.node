@@ -14,7 +14,7 @@ Environment="HOME={{{model.DATA_DIR}}}"
 Environment="PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin"
 
 # Migrate to + for systemd 246+
-ExecStartPre=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --id={{{ID}}}-netns \
+ExecStartPre=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --setup={{{ID}}}-netns \
 {{#configuration.OUTBOUND_ADDR}}
 					--outbound-addr={{{configuration.OUTBOUND_ADDR}}} \
 {{#model.PORT_MAP}}
@@ -31,7 +31,7 @@ ExecStartPre=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --id={{{ID}}}-netns 
 {{/configuration.OUTBOUND_ADDR}}
 
 ExecStart={{{model.IP_PATH}}} netns exec {{{ID}}}-netns runuser -u {{{USER}}} -m -- {{{ROOT_DIR}}}/bin/{{{model.DAEMON_NAME}}} {{{model.STARTUP_ARGS__CLI_ARGS}}}
-ExecStopPost=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --id={{{ID}}}-netns --remove
+ExecStopPost=/usr/sbin/eli {{{ROOT_DIR}}}/bin/netns-cli.lua --remove={{{ID}}}-netns
 {{/model.IS_ISOLATED}}
 {{^model.IS_ISOLATED}}
 User={{{USER}}}
