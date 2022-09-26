@@ -54,14 +54,12 @@ RestrictConnectionBetweenLightClients = false
 
 [Node]
 DataDir = "{{{model.DATA_DIR}}}"
-omitempty = ""
 IPCPath = "egem.ipc"
 HTTPPort = 8895
 HTTPVirtualHosts = ["localhost"]
 HTTPModules = ["net", "web3", "eth", "shh"]
 WSPort = 8896
 WSModules = ["net", "web3", "eth", "shh"]
-GraphQLPort = 8897
 
 [Node.P2P]
 MaxPeers = 150
